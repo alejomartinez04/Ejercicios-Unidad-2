@@ -1,36 +1,23 @@
 from gestorventa import GestorVentas
-
-def menu():
-    print("1. Ingresar venta")
-    print("2. Total de facturación de una sucursal")
-    print("3. Sucursal que más facturó en un día")
-    print("4. Sucursal con menos facturación en la semana")
-    print("5. Total facturado por todas las sucursales en la semana")
-    print("6. Salir")
-    return int(input("Seleccione una opción: "))
-
-gestor = GestorVentas()
-
-while True:
-    opcion = menu()
-    if opcion == 1:
-        dia = int(input("Ingrese el día de la semana (1-7): "))
-        sucursal = int(input("Ingrese el número de sucursal (1-5): "))
-        importe = float(input("Ingrese el importe de la factura: "))
-        gestor.ingresar_venta((dia-1),(sucursal-1), importe)
-    elif opcion == 2:
-        sucursal = int(input("Ingrese el número de sucursal (1-5): "))
-        total = gestor.total_facturacion_sucursal(sucursal-1)
-        print(f"Total facturado por la sucursal {sucursal+1}: {total}")
-    elif opcion == 3:
-        dia = int(input("Ingrese el día de la semana (1-7): "))
-        sucursal = gestor.sucursal_mas_facturo_dia(dia-1)
-        print(f"La sucursal que más facturó el día {dia} fue: {sucursal+1}")
-    elif opcion == 4:
-        sucursal = gestor.sucursal_menos_facturacion_semana()
-        print(f"La sucursal con menos facturación en la semana fue: {sucursal+1}")
-    elif opcion == 5:
-        total = gestor.total_facturado_semana()
-        print(f"Total facturado por todas las sucursales en la semana: {total}")
-    elif opcion == 6:
-        break
+if __name__=='__main__':
+    confirmar=str(input("¿Acceder a una funcionalidad? si/no: "))
+    gestor=GestorVentas()
+    while (confirmar=='si'):
+        opcion=str(input("'1' - Ingresar el importe de un dia de una sucursal.\n'2' - Obtener factura de una sucursal.\n'3' - Obtener la sucursal que más facturó un día.\n'4' - Obtener la sucursal que menos facturó en toda la semana.\n'5' - Obtener el total facturado de todas las sucursales.\n'6' - Salir del menú.\n"))
+        if opcion=='1':
+            xns=int(input("Ingresar una sucursal (de 1 a 5): "))
+            xnd=int(input("Ingresar un día de la semana (de 1 a 7): "))
+            ximp=float(input("Ingresar importe: "))
+            gestor.acumular(xns,xnd,ximp)
+        elif opcion=='2':
+            xns=int(input("Ingresar una sucursal (de 1 a 5): "))
+            print("El total de esa sucursal es: {}".format(gestor.total(xns)))
+        elif opcion=='3':
+            xnd=int(input("Ingresar un día de la semana (de 1 a 7): "))
+            print("La sucursal que más facturó ese día fue la {}".format(gestor.masfacturo(xnd)))
+        elif opcion=='4':
+            print("La sucursal que menos facturó en la semana fue la {}".format(gestor.menosfacturo()))
+        elif opcion=='5':
+            print("El total facturado por todas las sucursales durante la semana fue: {}".format(gestor.totalfacturado()))
+        elif opcion=='6':
+            confirmar=='no'
