@@ -12,7 +12,7 @@ class gestormotos:
         bandera=True
         for fila in reader:
             if bandera==True:
-                bandera==False
+                bandera=False
             else:
                 patente=fila[0]
                 marca=fila[1]
@@ -22,7 +22,6 @@ class gestormotos:
                 self.agregarmoto(unamoto)
     def buscar(self,xpat):
         indice=0
-        retorno=None
         bandera=False
         while not bandera and indice < len(self.__listamoto):
             if self.__listamoto[indice].getpat()==xpat:
